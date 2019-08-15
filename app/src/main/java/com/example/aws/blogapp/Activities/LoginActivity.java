@@ -1,8 +1,8 @@
 package com.example.aws.blogapp.Activities;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,26 +24,26 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText userMail,userPassword;
     private Button btnLogin;
-    private ProgressBar loginProgress;
+  //  private ProgressBar loginProgress;
     private FirebaseAuth mAuth;
     private Intent HomeActivity;
-    private ImageView loginPhoto;
+    private Button Reg;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
 
         userMail = findViewById(R.id.login_mail);
         userPassword = findViewById(R.id.login_password);
         btnLogin = findViewById(R.id.loginBtn);
-        loginProgress = findViewById(R.id.login_progress);
+       // loginProgress = findViewById(R.id.login_progress);
         mAuth = FirebaseAuth.getInstance();
         HomeActivity = new Intent(this,com.example.aws.blogapp.Activities.Home.class);
-        loginPhoto = findViewById(R.id.login_photo);
-        loginPhoto.setOnClickListener(new View.OnClickListener() {
+        Reg = findViewById(R.id.registerid);
+        Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -55,11 +55,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginProgress.setVisibility(View.INVISIBLE);
+    //    loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginProgress.setVisibility(View.VISIBLE);
+              //  loginProgress.setVisibility(View.VISIBLE);
                 btnLogin.setVisibility(View.INVISIBLE);
 
                 final String mail = userMail.getText().toString();
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (mail.isEmpty() || password.isEmpty()) {
                     showMessage("Please Verify All Field");
                     btnLogin.setVisibility(View.VISIBLE);
-                    loginProgress.setVisibility(View.INVISIBLE);
+                  //  loginProgress.setVisibility(View.INVISIBLE);
                 }
                 else
                 {
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
 
-                    loginProgress.setVisibility(View.INVISIBLE);
+             //       loginProgress.setVisibility(View.INVISIBLE);
                     btnLogin.setVisibility(View.VISIBLE);
                     updateUI();
 
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     showMessage(task.getException().getMessage());
                     btnLogin.setVisibility(View.VISIBLE);
-                    loginProgress.setVisibility(View.INVISIBLE);
+                 //   loginProgress.setVisibility(View.INVISIBLE);
                 }
 
 

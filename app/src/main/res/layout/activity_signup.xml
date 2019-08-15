@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/signin_page_background" />
+
+
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:optRoundCardCornerRadius="50dp"
+        app:optRoundCardElevation="0dp"
+        app:optRoundCardLeftBottomCorner="false"
+        app:optRoundCardLeftTopCorner="true"
+        app:optRoundCardRightBottomCorner="false"
+        app:optRoundCardRightTopCorner="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/regUserPhoto"
+                    android:layout_width="79dp"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/userphoto"
+                    app:layout_constraintBottom_toTopOf="@+id/regName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/regName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/user_icon"
+                    android:drawableRight="@drawable/user_icon"
+                    android:drawableTint="#696969"
+                    android:hint="Name"
+                    android:padding="15dp"
+                    android:textColor="#191919"
+                    android:textColorHint="#696969"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="#696969" />
+
+                <EditText
+                    android:id="@+id/regMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/email_icon"
+                    android:drawableRight="@drawable/email_icon"
+                    android:drawableTint="#696969"
+                    android:hint="E-mail"
+                    android:padding="15dp"
+                    android:textColor="#191919"
+                    android:textColorHint="#696969"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="#696969" />
+
+                <EditText
+                    android:id="@+id/regPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/pasword_icon"
+                    android:drawableRight="@drawable/pasword_icon"
+                    android:drawableTint="#696969"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp"
+                    android:textColor="#191919"
+                    android:textColorHint="#696969"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="#696969" />
+
+
+                <EditText
+                    android:id="@+id/regPassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/pasword_icon"
+                    android:drawableRight="@drawable/pasword_icon"
+                    android:drawableTint="#696969"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp"
+                    android:textColor="#191919"
+                    android:textColorHint="#696969"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="#696969" />
+
+                <Button
+                    android:id="@+id/regBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="80dp"
+                    android:background="@drawable/button_signin_background"
+                    android:text="Sign un"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

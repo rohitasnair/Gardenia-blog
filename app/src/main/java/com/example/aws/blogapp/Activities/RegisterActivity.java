@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     Uri pickedImgUri = Uri.parse("android.resource://com.example.aws.blogapp/drawable/userphoto");
 
     private EditText userEmail,userPassword,userPAssword2,userName;
-    private ProgressBar loadingProgress;
+ //   private ProgressBar loadingProgress;
     private Button regBtn;
 
     private FirebaseAuth mAuth;
@@ -49,16 +48,16 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_signup);
 
         //ini views
         userEmail = findViewById(R.id.regMail);
         userPassword = findViewById(R.id.regPassword);
         userPAssword2 = findViewById(R.id.regPassword2);
         userName = findViewById(R.id.regName);
-        loadingProgress = findViewById(R.id.regProgressBar);
+        //loadingProgress = findViewById(R.id.regProgressBar);
         regBtn = findViewById(R.id.regBtn);
-        loadingProgress.setVisibility(View.INVISIBLE);
+      //  loadingProgress.setVisibility(View.INVISIBLE);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -69,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 regBtn.setVisibility(View.INVISIBLE);
-                loadingProgress.setVisibility(View.VISIBLE);
+            //    loadingProgress.setVisibility(View.VISIBLE);
                 final String email = userEmail.getText().toString();
                 final String password = userPassword.getText().toString();
                 final String password2 = userPAssword2.getText().toString();
@@ -80,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                     // we need to display an error message
                     showMessage("Please Verify all fields") ;
                     regBtn.setVisibility(View.VISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
+                 //   loadingProgress.setVisibility(View.INVISIBLE);
 
 
                 }
@@ -154,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // account creation failed
                             showMessage("account creation failed" + task.getException().getMessage());
                             regBtn.setVisibility(View.VISIBLE);
-                            loadingProgress.setVisibility(View.INVISIBLE);
+                          //  loadingProgress.setVisibility(View.INVISIBLE);
 
                         }
                     }
