@@ -61,7 +61,7 @@ public class PostDetailActivity extends AppCompatActivity {
         // let's set the statue bar to transparent
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         // ini Views
         RvComment = findViewById(R.id.rv_comment);

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.core.app.ActivityCompat;
@@ -464,10 +465,10 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
             bundle.putString("Profile_key_press","true");
 
             Intent myIntent = new Intent(Home.this,
-                    web.class);
-            startActivity(myIntent);
+                    Web.class);
+           startActivity(myIntent);
            // getSupportActionBar().setTitle("Profile");
-          //  getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
+          // getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
 
         } else if (id == R.id.nav_settings) {
             bundle.putString("Settings_key_press","true");
