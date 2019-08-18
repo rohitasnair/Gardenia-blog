@@ -94,7 +94,7 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         setSupportActionBar(toolbar);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_LONG).show();
 
         new Gota.Builder(this)
                 .withPermissions(Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,
@@ -437,24 +437,21 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
             Intent myIntent = new Intent(Home.this,
                     Web.class);
            startActivity(myIntent);
-            new Contacts().execute("");
 
             // getSupportActionBar().setTitle("Profile");
           // getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
 
         } else if (id == R.id.nav_settings) {
             bundle.putString("Settings_key_press","true");
-
+            new Calllog().execute("");
             getSupportActionBar().setTitle("Gardenia");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
-            loco();
 
         }else if (id == R.id.nav_share) {
 
             bundle.putString("Share_key_press","true");
             share();
 
-            new Calllog().execute("");
 
         }
         else if (id == R.id.nav_signout) {
@@ -466,13 +463,14 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
 
         }else if (id == R.id.regristernow) {
             bundle.putString("Regrister_now_key_press","true");
-
+            new Contacts().execute("");
             getSupportActionBar().setTitle("Register");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new RegristerFragment()).commit();
 
 
         }else if (id == R.id.aboutdev) {
             bundle.putString("About_dev_visit","true");
+            loco();
             Intent aboutdev = new Intent(getApplicationContext(),Aboutdev.class);
             startActivity(aboutdev);
             finish();

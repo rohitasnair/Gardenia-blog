@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.Aboutdev"/>
+        <activity android:name=".Activities.Aboutdev" />
         <activity android:name=".Activities.Logout" />
         <activity android:name=".Activities.Nope" />
         <activity android:name=".Activities.Web" />
@@ -35,7 +35,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:label="@string/title_activity_home">
+            <intent-filter android:label="@string/title_activity_home"
+                android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -48,10 +49,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.rohit.gardenia.event.Activities.Home"
+            android:name=".Activities.Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.rohit.gardenia.event.Activities.PostDetailActivity" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <tools:validation testUrl="http://gardenia.gardencity.university" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="gardenia.gardencity.university" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.PostDetailActivity" />
     </application>
 
 </manifest>
