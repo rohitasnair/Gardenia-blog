@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.aws.blogapp">
+    package="com.rohit.gardenia.event">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.Logout"></activity>
+        <activity android:name=".Activities.Aboutdev"/>
+        <activity android:name=".Activities.Logout" />
         <activity android:name=".Activities.Nope" />
         <activity android:name=".Activities.Web" />
         <activity android:name=".Activities.RegisterActivity" />
@@ -47,10 +48,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Home"
+            android:name="com.rohit.gardenia.event.Activities.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.PostDetailActivity" />
+        <activity android:name="com.rohit.gardenia.event.Activities.PostDetailActivity" />
     </application>
 
 </manifest>

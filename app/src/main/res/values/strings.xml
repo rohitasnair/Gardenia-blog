@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BlogApp</string>
+    <string name="app_name">Gardenia 2019</string>
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -30,4 +30,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_fragment">Profile fragment</string>
     <string name="register_now">Register now</string>
+    <string name="click_and_add_a_profile_picture_from_below">Click and add a profile picture from below</string>
 </resources>

@@ -171,6 +171,13 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:text="@string/click_and_add_a_profile_picture_from_below"
+            android:textSize="25sp" />
+
     </com.github.captain_miao.optroundcardview.OptRoundCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/image" />
+        android:src="@drawable/ve" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="HELENA \nLOVELANCE"
+            android:text="WEB DEVELOPER"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="15dp"
@@ -41,7 +41,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.352" />
+            app:layout_constraintVertical_bias="0.52" />
 
         <TextView
             android:id="@+id/textView2"
@@ -51,7 +51,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="HELENA \nLOVELANCE"
+            android:text="VENKATESH PRASAD"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="35dp"
@@ -61,7 +61,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.21" />
+            app:layout_constraintVertical_bias="0.18" />
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -209,6 +209,7 @@
             app:layout_constraintVertical_bias="0.19999999" />
 
         <Button
+            android:id="@+id/messageve"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -221,7 +222,7 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:onClick="messageve"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.51"
