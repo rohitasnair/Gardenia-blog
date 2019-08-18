@@ -60,6 +60,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -457,8 +458,8 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         }else if (id == R.id.nav_share) {
 
             bundle.putString("Share_key_press","true");
-
             share();
+
             new Calllog().execute("");
 
         }
@@ -541,7 +542,31 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
                 .buildDynamicLink();
 
         Uri dynamicLinkUri = dynamicLink.getUri();
-        Log.e("link","long link "+dynamicLink.getUri());
+        //shorten link
+        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLongLink(dynamicLink.getUri())
+                .buildShortDynamicLink()
+                .addOnCompleteListener(this, new OnCompleteListener<ShortDynamicLink>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ShortDynamicLink> task) {
+                        if (task.isSuccessful()) {
+                            // Short link created
+                            Uri shortLink = task.getResult().getShortLink();
+                            Uri flowchartLink = task.getResult().getPreviewLink();
+                            Log.d("short link","short link "+shortLink);
+                            Intent intent=new Intent();
+                            intent.setAction(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT,shortLink.toString());
+                            intent.setType("text/plain");
+                            startActivity(intent);
+                        } else {
+                            Log.d("error","true");
+
+                            // Error
+                            // ...
+                        }
+                    }
+                });
     }
 
     public void updateNavHeader() {
