@@ -7,7 +7,25 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Privacy Policy</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
 
+    <string name="slide_1_title">Hello Students!</string>
+    <string name="slide_1_desc">This app allows you to register a new account for Gardenia</string>
+
+    <string name="slide_2_title">Post articles</string>
+    <string name="slide_2_desc">Write and publish blog posts about Gardenia</string>
+
+    <string name="slide_3_title">Register</string>
+    <string name="slide_3_desc">Choose from over 30+ Event</string>
+
+    <string name="slide_4_title">Privacy policy</string>
+    <string name="slide_4_desc">This app do collect Personal and sensitive user data(including E-mail) to improve the features of the app</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_fragment">Profile fragment</string>

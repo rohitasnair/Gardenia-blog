@@ -27,7 +27,8 @@
         <activity android:name=".Activities.Web" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Slideshow.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
