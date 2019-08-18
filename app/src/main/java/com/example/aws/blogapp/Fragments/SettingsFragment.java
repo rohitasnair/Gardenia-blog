@@ -12,7 +12,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.aws.blogapp.Activities.Home;
 import com.example.aws.blogapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +72,10 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        FloatingActionButton floatingActionButton = ((Home) getActivity()).getFloatingActionButton();
+        if (floatingActionButton != null) {
+            floatingActionButton.hide();
+        }
         View v=inflater.inflate(R.layout.fragment_settings, container, false);
         mWebView = v.findViewById(R.id.webview);
         mWebView.loadUrl("https://gardenia.gardencity.university");

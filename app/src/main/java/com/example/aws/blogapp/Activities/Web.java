@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.aws.blogapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,8 +37,6 @@ public class Web extends AppCompatActivity {
         TextView navUserMail = findViewById(R.id.textView5);
         navUserMail.setText(currentUser.getEmail());
         navUsername.setText(currentUser.getDisplayName());
-
-
 
 
 

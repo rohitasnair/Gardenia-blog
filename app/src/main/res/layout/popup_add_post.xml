@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:hint="Description"
+        android:hint="Description and add photo from below"
         android:background="@drawable/popup_edittext_style"
         android:id="@+id/popup_description"
         android:layout_width="0dp"
@@ -42,6 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popup_title" />
+
+
 
     <ImageView
         android:background="#2d2d2d"
@@ -71,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popup_img"
-        app:srcCompat="@drawable/ic_create_black_24dp" />
+        app:srcCompat="@drawable/tick" />
 
     <ProgressBar
         android:padding="4dp"
