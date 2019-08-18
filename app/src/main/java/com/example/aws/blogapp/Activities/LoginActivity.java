@@ -1,9 +1,11 @@
 package com.example.aws.blogapp.Activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Intent HomeActivity;
     private Button Reg;
+    AlertDialog dialog_verifying;
 
 
 
@@ -72,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View alertLayout= inflater.inflate(R.layout.processing_dialog,null);
+                    AlertDialog.Builder show = new AlertDialog.Builder(LoginActivity.this);
+                    show.setView(alertLayout);
+                    show.setCancelable(false);
+                    dialog_verifying = show.create();
+                    dialog_verifying.show();
                     signIn(mail,password);
                 }
 
@@ -94,7 +104,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
 
-             //       loginProgress.setVisibility(View.INVISIBLE);
+                    dialog_verifying.dismiss();
+
+                    //       loginProgress.setVisibility(View.INVISIBLE);
                     btnLogin.setVisibility(View.VISIBLE);
                     updateUI();
 

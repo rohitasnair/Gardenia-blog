@@ -20,6 +20,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
+import com.example.aws.blogapp.Fragments.RegristerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.core.app.ActivityCompat;
@@ -416,6 +417,11 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            String url = "https://gardenia.gardencity.university/privacy-policy/";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+            Log.d("pressed","true");
             return true;
         }
 
@@ -451,7 +457,7 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         } else if (id == R.id.nav_settings) {
             bundle.putString("Settings_key_press","true");
 
-            getSupportActionBar().setTitle("Settings");
+            getSupportActionBar().setTitle("Gardenia");
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingsFragment()).commit();
             loco();
 
@@ -465,11 +471,16 @@ private FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getIns
         }
         else if (id == R.id.nav_signout) {
             bundle.putString("Sign_out_key_press","true");
-
-            FirebaseAuth.getInstance().signOut();
-            Intent loginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+            Intent loginActivity = new Intent(getApplicationContext(),Logout.class);
             startActivity(loginActivity);
             finish();
+
+
+        }else if (id == R.id.regristernow) {
+            bundle.putString("Regrister_now_key_press","true");
+
+            getSupportActionBar().setTitle("Register");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new RegristerFragment()).commit();
 
 
         }

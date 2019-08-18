@@ -1,6 +1,7 @@
 package com.example.aws.blogapp.Activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    AlertDialog profile_dialog;
 
 
     @Override
@@ -86,7 +89,13 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     // everything is ok and all fields are filled now we can start creating user account
                     // CreateUserAccount method will try to create the user if the email is valid
-
+                    LayoutInflater inflater = getLayoutInflater();
+                    View alertLayout= inflater.inflate(R.layout.profile_create_dialog,null);
+                    AlertDialog.Builder show = new AlertDialog.Builder(RegisterActivity.this);
+                    show.setView(alertLayout);
+                    show.setCancelable(false);
+                    profile_dialog = show.create();
+                    profile_dialog.show();
                     CreateUserAccount(email,name,password);
                 }
 
@@ -138,7 +147,6 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             // user account created successfully
                             showMessage("Account created");
                             // after we created user account we need to update his profile picture and name
@@ -202,6 +210,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
+                                            profile_dialog.dismiss();
                                             // user info updated successfully
                                             showMessage("Register Complete");
                                             updateUI();

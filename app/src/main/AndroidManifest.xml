@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.Nope"></activity>
+        <activity android:name=".Activities.Logout"></activity>
+        <activity android:name=".Activities.Nope" />
         <activity android:name=".Activities.Web" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.HomeActivity" />
