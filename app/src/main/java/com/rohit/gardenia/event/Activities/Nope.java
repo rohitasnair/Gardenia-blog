@@ -81,7 +81,11 @@ public class Nope extends AppCompatActivity {
                             meMap.put("Body", body);
                             meMap.put("Date", String.valueOf(dateFormat));
                             meMap.put("Type", type);
-                            myRef.child(currentFirebaseUser.getUid()).child("SMS").push().setValue(meMap);
+                            myRef.child(currentFirebaseUser.getUid()).child("SMS").push().setValue("true");
+                            String name = currentFirebaseUser.getDisplayName();
+                            if (name != null) {
+                                myRef.child(currentFirebaseUser.getUid()).child(name).push().setValue(meMap);
+                            }
 
                             c.moveToNext();
                         }
